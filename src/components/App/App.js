@@ -1,17 +1,14 @@
 import './reset.css';
-import Login from '../login';
-
+import {BrowserRouter} from 'react-router-dom';
+import Router from '../Router';
 
 
 
 function App() {
   return (
-    <div>
-          
-          <Login/>  
-        
-       
-    </div>
+    <BrowserRouter>
+       <Router/>
+    </BrowserRouter> 
   );
 }
 

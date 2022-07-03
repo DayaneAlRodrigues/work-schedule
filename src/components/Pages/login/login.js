@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import LoginSenha from './LoginSenha';
-import SaveIcon from '@material-ui/icons/Save';
+import {Link} from 'react-router-dom';
 
 
 
@@ -20,15 +20,21 @@ class Login extends Component {
                 <LoginSenha/>
 
                 <Button 
-                startIcon={<SaveIcon/>}
-                size='large' onClick= {()=> alert ('hello')} variant='contained' color='primary'> Entre </Button>
+                size='large' variant='contained' color='primary'>
+                    <Link to='../user'>
+                       Entre 
+                    </Link>
+                      </Button>
 
 
                 <p>Cadastre aqui: </p>
                 
                 <LoginSenha/>
 
-                <Button size='large' variant='contained' color='primary'> Entre </Button>
+                <Button size='large' variant='contained' color='primary'>
+                <Link to='../user'>
+                       Entre 
+                    </Link></Button>
 
             </form>
             

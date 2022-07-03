@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class User extends Component {
+class UserSchedule extends Component {
     state = {  } 
     render() { 
         return (
@@ -11,4 +11,4 @@ class User extends Component {
     }
 }
  
-export default User;
+export default UserSchedule;
