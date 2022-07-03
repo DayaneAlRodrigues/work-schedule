@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 import UserSchedule from '../Pages/user'
 import RegisterSchedule from '../Pages/registrer'
 import Login from '../Pages/login';
@@ -8,19 +8,21 @@ import Login from '../Pages/login';
 function Router (){
 	
 	return (
-		<Switch>
-			<Route exact path='../Pages/login'>
-				<Login/> 
-			</Route>
 
-			<Route exact path='../Pages/user'>
-				<UserSchedule/> 
-			</Route>
+		
+			<Routes>
+			<Route path='/' element={<Login/>}/>
 			
-			<Route exact path='../Pages/registrer'>
-				<RegisterSchedule/> 
-			</Route>
-		</Switch>
+
+			<Route  path='/user' element={<UserSchedule/>}/>
+			
+			
+			<Route  path='/registrer' element={<RegisterSchedule/>}/>
+				
+			</Routes>
+
+		
         )
 	}	
+
 export default Router;
