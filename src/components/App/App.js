@@ -1,12 +1,16 @@
-import './App.css';
-import Button from '@material-ui/core/Button';
+import './reset.css';
 import Login from '../login';
+
+
+
 
 function App() {
   return (
     <div>
-      <Button>Olá</Button>
-      <Login/>
+          
+          <Login/>  
+        
+       
     </div>
   );
 }
