@@ -3,11 +3,18 @@ import Button from '@material-ui/core/Button';
 import LoginSenha from './LoginSenha';
 import {Link} from 'react-router-dom';
 import { Grid } from '@material-ui/core';
-import './styles.css'
-
-
+import './styles.css';
+import GoogleLogin from 'react-google-login';
 
 class Login extends Component {
+    const [name , setName] = useState()
+    const [email , setEmail] = useState()
+    const [profilePic, setProfilePic] = useState()
+    const [isLoggedIn, setIsLoggedIn] = useState()
+
+    const responseGoogle = (response) => {
+
+    }
      
     render() { 
         return (
@@ -16,7 +23,11 @@ class Login extends Component {
                 <form>
                 <section className='autenticacao'>
                     <h1>Entre com: </h1>
-                    <a href='https://www.google.com/intl/pt-BR/account/about/'> Google</a>
+                    <GoogleLogin
+                    clientId='521347212984-ks1bdv1ul3hg8vl4odq4ou794bk9mkku.apps.googleusercontent.com' 
+                    buttonText='Continuar com o Google'
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}/>
                     <p> ou com : </p>
                     <a href='https://pt-br.facebook.com/'>Facebook</a>
                 </section>
