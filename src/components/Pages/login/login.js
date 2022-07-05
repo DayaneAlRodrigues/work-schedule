@@ -29,8 +29,8 @@ function Login () {
                     buttonText='Continuar com o Google'
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}/>
-
-                    {isLoggedIn ? <div>
+                    
+                     {isLoggedIn ? <div>
                         <Link to='../user'/>
                     </div> : ''}
  

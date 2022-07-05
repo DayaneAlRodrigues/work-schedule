@@ -6,13 +6,16 @@ import UserSchedule from '../Pages/user/User';
 import Registrer from '../Pages/registrer';
 import MenuIcon from '@material-ui/core/Menu'
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@material-ui/core';
+import  theme  from '../../theme/theme';
+import	{ThemeProvider} from '@mui/material/styles'
 
 
 
 function App() {
   return (
     <BrowserRouter>
-		<header>
+		<ThemeProvider theme={theme}>
+			<header>
 			<AppBar color='transparent'>
 				<Toolbar>
 					<IconButton>
@@ -45,6 +48,8 @@ function App() {
 			<Route  path='/registrer' element={<Registrer/>}/>
 				
 			</Routes>
+		</ThemeProvider>
+		
     </BrowserRouter>
     
     
