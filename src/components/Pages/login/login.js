@@ -1,64 +1,64 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react';
 import LoginSenha from './LoginSenha';
-import {Link} from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import './styles.css';
 import GoogleLogin from 'react-google-login';
+import ButtonEntrar from '../../ButtonEntrar/ButtonEntrar';
+import {Link} from 'react-router-dom';
 
-class Login extends Component {
+function Login () {
+   
     const [name , setName] = useState()
     const [email , setEmail] = useState()
-    const [profilePic, setProfilePic] = useState()
-    const [isLoggedIn, setIsLoggedIn] = useState()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const responseGoogle = (response) => {
-
-    }
-     
-    render() { 
+        const {profileObj} = {name, email } = response;
+        setName(name);
+        setEmail(email);
+        setIsLoggedIn(true);
+      } 
         return (
-            <>
+            <div>
             <Grid container justifyContent='center'>
                 <form>
                 <section className='autenticacao'>
-                    <h1>Entre com: </h1>
+                   <div> 
                     <GoogleLogin
                     clientId='521347212984-ks1bdv1ul3hg8vl4odq4ou794bk9mkku.apps.googleusercontent.com' 
                     buttonText='Continuar com o Google'
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}/>
-                    <p> ou com : </p>
-                    <a href='https://pt-br.facebook.com/'>Facebook</a>
-                </section>
-                
-                <p>Ou entre por:</p>
+
+                    {isLoggedIn ? <div>
+                        <Link to='../user'/>
+                    </div> : ''}
+ 
+                    </div>
+                    <div>
+                        <p> ou com : </p>
+                        <a href='https://pt-br.facebook.com/'>Facebook</a>
+                    </div>
+                    
+                </section>   
+                    
                 <LoginSenha/>
 
-                <Button 
-                size='large' variant='contained' color='primary'>
-                    <Link to='../user'>
-                       Entre 
-                    </Link>
-                      </Button>
-
+                <ButtonEntrar/>
 
                 <p>Cadastre aqui: </p>
                 
                 <LoginSenha/>
 
-                <Button size='large' variant='contained' color='primary'>
-                <Link to='../user'>
-                       Entre 
-                    </Link></Button>
+                <ButtonEntrar/>
 
             </form>
             </Grid>
             
             
-            </>
+            </div>
         );
-    }
+    
 }
  
 
