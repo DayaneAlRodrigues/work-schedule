@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
+import './style.css'
+import theme from '../../theme/theme';
+import { ThemeProvider } from '@mui/private-theming';
 
 class ButtonEntrar extends Component {
     constructor(props) {
@@ -10,11 +13,16 @@ class ButtonEntrar extends Component {
     render() { 
         return ( 
             <>
-            <Button size='large' variant='contained' color='primary'>
+            <ThemeProvider theme={theme}>
+
+                <Button fullWidth='300vh'  size='large' variant='contained' color='primary'>
                 <Link to='../user'>
-                   Entre 
+                  <p className='nome-button'> Entre </p>
                 </Link>
-            </Button>
+                </Button>
+
+            </ThemeProvider>
+            
             </>
 
             

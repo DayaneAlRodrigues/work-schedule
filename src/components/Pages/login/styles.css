@@ -1,9 +1,12 @@
 .login {
-    margin-top: 90px ;
+    margin-top: 160px ;
     margin-bottom:10px;
     padding: 20px 20px;
     display: flex;
     flex-direction: column;
+    background-color: #1769aa;
+   
+    color:aliceblue
 
 }
 
@@ -12,10 +15,12 @@
     vertical-align: baseline;
     flex-wrap: nowrap;
     flex-direction: column;
+    box-shadow: 2px;
+    border: solid 2px #0000;
 }
 
 .text-form-login {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     padding: 10px;
     margin-top: 5px;
 }
@@ -24,4 +29,8 @@
     text-align: end;
     margin-top: 15px;
     text-decoration: none;
+}
+.box {
+    box-shadow: 2px;
+    border: solid 1px #0000;
 }

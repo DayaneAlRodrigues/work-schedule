@@ -1,16 +1,16 @@
 import { createTheme } from "@mui/material";
-import { blue, grey, purple } from '@material-ui/core/colors';
+import {  cyan, grey, indigo, } from '@material-ui/core/colors';
 
  const theme = createTheme({
     palette:{
         primary:{
-            main: purple[700],
-            dark: purple[800],
-            light: purple[500],
+            main: cyan[600],
+            dark: cyan[800],
+            light: cyan[500],
             contrastText: '#ffffff',
         },
         secondary:{
-            main: grey[500],
+            main: indigo[500],
             dark: grey[400],
             light: grey[300],
             contrastText: '#ffffff',
@@ -35,7 +35,7 @@ import { blue, grey, purple } from '@material-ui/core/colors';
         MuiButton:{
             root: {
                 textTransform: "none",
-                textDecoration: 'none'
+                textDecoration: "none"
             },
 
         }
