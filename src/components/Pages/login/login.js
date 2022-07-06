@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import LoginSenha from './LoginSenha';
-import { Grid } from '@material-ui/core';
+import { FormControlLabel, Grid } from '@material-ui/core';
 import './styles.css';
 import GoogleLogin from 'react-google-login';
 import ButtonEntrar from '../../ButtonEntrar/ButtonEntrar';
@@ -20,8 +20,16 @@ function Login () {
       } 
         return (
             <div>
-            <Grid container justifyContent='center'>
-                <form>
+            <Grid container justifyContent='center' >
+              <form>
+                <div className='login'>
+                    <LoginSenha/>
+
+                    <ButtonEntrar/>
+
+                    <p className='cadastre-se'><Link to='../Cadastre/Cadastre'> Cadastre aqui!</Link> </p>
+                </div>
+            
                 <section className='autenticacao'>
                    <div> 
                     <GoogleLogin
@@ -40,19 +48,10 @@ function Login () {
                         <a href='https://pt-br.facebook.com/'>Facebook</a>
                     </div>
                     
-                </section>   
-                    
-                <LoginSenha/>
+                </section> 
 
-                <ButtonEntrar/>
-
-                <p>Cadastre aqui: </p>
-                
-                <LoginSenha/>
-
-                <ButtonEntrar/>
-
-            </form>
+                </form> 
+              
             </Grid>
             
             

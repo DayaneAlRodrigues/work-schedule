@@ -1,6 +1,27 @@
-.autenticacao {
+.login {
     margin-top: 90px ;
     margin-bottom:10px;
     padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
 
+}
+
+.form-login {
+    display:flex;
+    vertical-align: baseline;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.text-form-login {
+    margin-bottom: 5px;
+    padding: 10px;
+    margin-top: 5px;
+}
+.cadastre-se {
+   
+    text-align: end;
+    margin-top: 15px;
+    text-decoration: none;
 }
