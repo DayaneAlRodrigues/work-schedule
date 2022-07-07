@@ -17,7 +17,7 @@ class Header extends Component {
 					</IconButton>
 					
                     <Typography variant='h6'>
-						SCHEDULE Login
+						SCHEDULE 
 					</Typography>				
 							
 				</Toolbar>
