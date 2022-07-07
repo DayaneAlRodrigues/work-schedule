@@ -11,6 +11,7 @@ function UserSchedule (){
                 <WeekView/>
                 <Appointments />
                 <AppointmentForm />
+                <IntegratedEditing />
             </Scheduler>
         </div>
 

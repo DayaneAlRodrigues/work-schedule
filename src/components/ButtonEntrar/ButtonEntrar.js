@@ -5,26 +5,26 @@ import './style.css'
 import theme from '../../theme/theme';
 import { ThemeProvider } from '@mui/private-theming';
 import UserSchedule from '../Pages/user/User'
+import { Redirect } from 'react-router'
 
 class ButtonEntrar extends Component {
 
-    [login , setLogin] = useState();
-   // document.event.click.ButtonEntrar = <UserSchedule/>
     constructor(props) {
         super(props);
     }
     state = {  }
+
     render() { 
         return ( 
             <>
             <ThemeProvider theme={theme}>
-
+                <Link  to='../user/User'>
                 <Button fullWidth='300vh'  size='large' variant='contained' color='primary'>
-                <Link to='../user/User'>
+                
                   <p className='nome-button'> Entre </p>
-                </Link>
+                
                 </Button>
-
+                </Link>
             </ThemeProvider>
             
             </>
