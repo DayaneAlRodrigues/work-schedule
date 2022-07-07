@@ -18,7 +18,7 @@ class ButtonEntrar extends Component {
         return ( 
             <>
             <ThemeProvider theme={theme}>
-                <Link  to='../user/User'>
+                <Link  to='../user'>
                 <Button fullWidth='300vh'  size='large' variant='contained' color='primary'>
                 
                   <p className='nome-button'> Entre </p>
