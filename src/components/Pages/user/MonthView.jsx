@@ -15,12 +15,13 @@ function MonthViewUser (){
     
     const saveAppointment = (evento) => {
       // função para lidar com a confirmação de alteração de compromisso salvar evento 
-      schedulerData.push({})
+      schedulerData.push()
     }
     
     const deleteAppointment = (evento) => {
         // função para deletar compromisso 
-        schedulerData.props = evento.target.value.deleted
+        schedulerData.props = evento.target.value.pop();
+
     }
     
     return (
@@ -33,11 +34,11 @@ function MonthViewUser (){
                 <Scheduler data={schedulerData} >
                                     
                     <ViewState/>
-                    <EditingState onCommitChanges={saveAppointment} />
-                    <IntegratedEditing />
+                    <EditingState onCommitChanges={saveAppointment}  />
+                    <IntegratedEditing  />
                     <MonthView />
                     <Appointments />
-                    <AppointmentForm />  
+                    <AppointmentForm  onAppointmentDataChange={saveAppointment} />  
                 </Scheduler>
                 </Grid>
                  
