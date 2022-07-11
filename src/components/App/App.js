@@ -1,12 +1,10 @@
 import './reset.css';
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Login from '../Pages/login';
-import UserSchedule from '../Pages/user/User';
-import Registrer from '../Pages/registrer';
 import  theme  from '../../theme/theme';
 import	{ThemeProvider} from '@mui/material'
 import Header from '../Header/Header';
+import Router from '../Router/Router';
 
 
 
@@ -18,14 +16,7 @@ function App() {
 		
 	<Header/>	        
     
-	 <Routes>
-			<Route path='/' element={<Login/>}/>
-			
-			<Route  path='/user' element={<UserSchedule/>}/>
-			
-			<Route  path='/registrer' element={<Registrer/>}/>
-				
-	</Routes>
+	 <Router/>
 		
     </BrowserRouter>
     </ThemeProvider>

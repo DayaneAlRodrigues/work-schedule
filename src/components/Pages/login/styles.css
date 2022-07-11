@@ -34,3 +34,18 @@
     box-shadow: 2px;
     border: solid 1px #0000;
 }
+
+#singnUp {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+#singnUp p {
+    padding-left: 5px;
+}
+
+#signIn {
+    margin-top: 10px;
+}
