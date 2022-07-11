@@ -1,20 +1,22 @@
 import { ViewState , EditingState , IntegratedEditing} from '@devexpress/dx-react-scheduler';
 import  { Scheduler , WeekView , Appointments , AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
-import {Container, Grid , Button} from '@material-ui/core';
+import {Container, Grid } from '@material-ui/core';
 import './style.css'
-import { Link } from   'react-router-dom';
-
-
-
+import NavigatorUser from '../../navigatorUser/NavigatorUser';
 
 
 const schedulerData = [
-    { startDate: '2022-07-09T09:45', endDate: '2022-07-09T11:00', title:'Exemplo'},
-    { startDate: '2022-07-10T12:00', endDate: '2022-07-10T13:30', title:'Exemplo 2'}
+    { startDate: '2022-07-12T09:45', endDate: '2022-07-12T11:00', title:'Exemplo'}
 ];
 
-const saveAppointment = () => {
-  
+const saveAppointment = (evento) => {
+  // função para lidar com a confirmação de alteração de compromisso salvar evento 
+  schedulerData.props = evento.target.value
+}
+
+const deleteAppointment = (evento) => {
+    // função para deletar compromisso 
+    schedulerData.props = evento.target.value.deleted
 }
 
 function UserSchedule (){
@@ -25,14 +27,11 @@ function UserSchedule (){
 
         <div id='calendar'>
 
-            <Link to = '/'><Button> LogOut </Button></Link>
-           <Link to = '/user/DayView'><Button> Day </Button></Link>
-           <Link to = '/user/MonthView'><Button> Month</Button></Link>
-
-
+            <NavigatorUser/>
+            
             <Container maxWidth='md'  >
                 <Grid container justify='center'>
-                <Scheduler data={schedulerData} >
+                <Scheduler data={schedulerData}>
                                     
                     <ViewState/>
                     <EditingState onCommitChanges={saveAppointment} />

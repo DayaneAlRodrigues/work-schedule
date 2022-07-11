@@ -1,0 +1,9 @@
+.navigator {
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navigator Link {
+    text-decoration: none;
+}
