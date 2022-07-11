@@ -1,30 +1,33 @@
 import { ViewState , EditingState , IntegratedEditing} from '@devexpress/dx-react-scheduler';
 import  { Scheduler, Appointments , AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
-import {Container, Grid , Button} from '@material-ui/core';
+import {Container, Grid} from '@material-ui/core';
 import './style.css'
 import { MonthView } from '@devexpress/dx-react-scheduler-material-ui';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import NavigatorUser from '../../navigatorUser/NavigatorUser';
 
 
+const schedulerData = [
+    { startDate: '2022-07-12T09:45', endDate: '2022-07-12T11:00', title:'Exemplo'}
+];
+
+const saveAppointment = (evento) => {
+  // função para lidar com a confirmação de alteração de compromisso salvar evento 
+  schedulerData.props = evento.target.value
+}
+
+const deleteAppointment = (evento) => {
+    // função para deletar compromisso 
+    schedulerData.props = evento.target.value.deleted
+}
 
 function MonthViewUser (){
 
-    const [schedulerData, setSchedulerData ] = useState({startDate: " ", endDate: " ", title: " "}) ;
-
-    const save = () => {
-       const setSaveAppoiment = setSchedulerData.value;
-        
-    }
-
-    
+   
     return (
         <div>
         <div id='calendar'>
 
-        <Link to = '/'><Button> LogOut </Button></Link>
-        <Link to = '/user'><Button> Week </Button></Link>
-        <Link to = '/user/MonthView'><Button> Month</Button></Link>
+        <NavigatorUser/>
 
             <Container maxWidth='md'  >
                 <Grid container justify='center'>
