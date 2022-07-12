@@ -3,47 +3,49 @@ import  { Scheduler , WeekView  } from '@devexpress/dx-react-scheduler-material-
 import {Container, Grid } from '@material-ui/core';
 import './style.css'
 import NavigatorUser from '../../navigatorUser/NavigatorUser';
-import {  collection, deleteDoc, getDocs, updateDoc, doc } from 'firebase/firestore';
+import {  collection, deleteDoc, getDocs, updateDoc, doc, Timestamp } from 'firebase/firestore';
 import {  db} from '../../Firebase/firebase'
 import { useEffect, useState} from 'react';
-import { Button} from '@material-ui/core';
+import openAppointment from '../registrer/openAppointment';
 
 
 
+function UserSchedule (props){
 
-function UserSchedule (){
 
+    const schedulerData = [
+        { startDate: '2022-07-13T09:45', endDate: '2022-07-13T11:00', title:'Exemplo'}
+    ];
+   
   // estado para guardar os compromissos
-  const [compromisso, setCompromisso ]=useState([])
+  const [appointment, setAppointment ]=useState([])
 
-  //variável responsável por carregar no calendário os compromissos
-  const schedulerData = [
-      {compromisso}
-  ];
 
   // variável para trazer os dados do banco de dados
   const appointmentCollectionRef = collection(db, 'appointment');
   
   // efeito para carregar o compromisso na página
   useEffect(() => {
-       async function getCompromisso () {
+       async function getAppointment () {
           const data = await getDocs(appointmentCollectionRef)
-          console.log(data);
-          setCompromisso(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        setAppointment(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
       };
-      getCompromisso();
+      getAppointment();
   }, [])  
 
-  async function deletarCompromisso (id){
-    const compromissoDoc  = doc(db, 'appointment' , id);
-    await deleteDoc(compromissoDoc)
-    console.log(compromissoDoc);
-}
 
-async function updateCompromisso (id) {
-    const compromissoDoc  = doc(db, 'appointment' , id);
-    await updateDoc(compromissoDoc)
-    console.log(compromissoDoc)
+
+const openAppointment = () => {
+
+    return (
+        <div>
+    
+
+    <openAppointment/>
+
+        </div>
+   
+    )
 }
 
     
@@ -56,9 +58,8 @@ async function updateCompromisso (id) {
             
             <Container maxWidth='md'  >
                 <Grid container justify='center'>
-                <Scheduler data={schedulerData}>
-                <Button variant='text' color='inherit' onClick={deletarCompromisso}> Deletar </Button> 
-                <Button variant='text' color='inherit' onClick={updateCompromisso}> Atualizar </Button>                   
+                <Scheduler data={schedulerData} onClick={openAppointment}>
+                             
                     <ViewState/>
                     <EditingState  />
                     <IntegratedEditing />

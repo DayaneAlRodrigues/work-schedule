@@ -18,39 +18,44 @@ import { Button} from '@material-ui/core';
 
 function DayViewUser (){
 
-    // estado para guardar os compromissos
-    const [compromisso, setCompromisso ]=useState([])
 
-    //variável responsável por carregar no calendário os compromissos
     const schedulerData = [
-        {compromisso}
+        { startDate: '2022-07-13T09:45', endDate: '2022-07-13T11:00', title:'Exemplo'}
     ];
 
-    // variável para trazer os dados do banco de dados
-    const appointmentCollectionRef = collection(db, 'appointment');
-    
-    // efeito para carregar o compromisso na página
-    useEffect(() => {
-         async function getCompromisso () {
-            const data = await getDocs(appointmentCollectionRef)
-            console.log(data);
-            setCompromisso(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
-        };
-        getCompromisso();
-    }, [])
+ 
+  // estado para guardar os compromissos
+  const [appointment, setAppointment ]=useState([])
 
-    async function deletarCompromisso (id){
-        const compromissoDoc  = doc(db, 'appointment' , id);
-        await deleteDoc(compromissoDoc)
-        console.log(compromissoDoc);
-    }
 
-    async function updateCompromisso (id) {
-        const compromissoDoc  = doc(db, 'appointment' , id);
-        await updateDoc(compromissoDoc)
-        console.log(compromissoDoc)
-    }
-   
+  // variável para trazer os dados do banco de dados
+  const appointmentCollectionRef = collection(db, 'appointment');
+  
+  // efeito para carregar o compromisso na página
+  useEffect(() => {
+       async function getAppointment () {
+          const data = await getDocs(appointmentCollectionRef)
+        appointment (data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+      };
+      getAppointment();
+  }, [])  
+
+  async function deleteAppointment (id){
+    const compromissoDoc  = doc(db, 'appointment' , id);
+    await deleteDoc(compromissoDoc)
+    console.log(compromissoDoc);
+    setAppointment(<Button variant='text' color='inherit' 
+                onClick={deleteAppointment}> Deletar 
+                </Button> )
+}
+
+async function updateAppointment (id) {
+    const compromissoDoc  = doc(db, 'appointment' , id);
+    await updateDoc(compromissoDoc)
+    console.log(compromissoDoc)
+    setAppointment(<Button variant='text' color='inherit' onClick={updateAppointment}> Atualizar </Button> )
+}
+
     
     return (
         <div>
@@ -64,11 +69,9 @@ function DayViewUser (){
                 <Scheduler
                     data={schedulerData}>
 
-                <Button variant='text' color='inherit' 
-                onClick={deletarCompromisso}> Deletar 
-                </Button> 
+                
 
-                <Button variant='text' color='inherit' onClick={updateCompromisso}> Atualizar </Button> 
+                 
 
                 <DayView
                     startDayHour={8}
