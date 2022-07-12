@@ -7,10 +7,11 @@ const NavigatorUser = () => {
 
     return (
         <div className='navigator'>
-           <Link to = '/user/DayView'><Button> Day </Button></Link>
-           <Link to = '/user'><Button> Week </Button></Link>
-           <Link to = '/user/MonthView'><Button> Month</Button></Link> 
-           <Link to = '/'><Button> LogOut </Button></Link>
+           <Link to = '/registrer'><Button> Criar Compromisso </Button></Link> 
+           <Link to = '/user/DayView'><Button> Dia </Button></Link>
+           <Link to = '/user'><Button> Semana </Button></Link>
+           <Link to = '/user/MonthView'><Button> Mês</Button></Link> 
+           <Link to = '/'><Button> Sair </Button></Link>
         </div>
     )
 }

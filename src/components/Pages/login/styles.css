@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     background-color: #41739d;
-   
     color:aliceblue
 
 }
@@ -15,8 +14,6 @@
     vertical-align: baseline;
     flex-wrap: nowrap;
     flex-direction: column;
-    box-shadow: 2px;
-    border: solid 2px #0000;
 }
 
 .text-form-login {

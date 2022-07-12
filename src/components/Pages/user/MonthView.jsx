@@ -37,8 +37,7 @@ function MonthViewUser (){
                     <EditingState onCommitChanges={saveAppointment}  />
                     <IntegratedEditing  />
                     <MonthView />
-                    <Appointments />
-                    <AppointmentForm  onAppointmentDataChange={saveAppointment} />  
+                      
                 </Scheduler>
                 </Grid>
                  
