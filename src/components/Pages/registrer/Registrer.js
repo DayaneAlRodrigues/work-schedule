@@ -9,19 +9,14 @@ const Registrer = () => {
             <Grid container justify='center'className='box' >
                 <FormControl>
                 <label for='data' className='text-form-registrer'>
-                    Data
+                    Data e horario inicial
                 </label>
-                <TextField for='data' required placeholder='dd/mm/aaaa'/>
-
-                <label for='startTime' className='text-form-registrer'>
-                    Horario inicial
-                </label>
-                <TextField for='startTime' required placeholder='00:00 AM/PM'/>
+                <TextField for='data' required placeholder='2022-07-12T09:45'/>
 
                 <label for='endTime' className='text-form-registrer'>
-                    Duração
+                    Data final e horario final
                 </label >
-                <TextField for='endTime' required placeholder='00:00 AM/PM'/>
+                <TextField for='endTime' required placeholder='2022-07-12T11:00'/>
 
                 <label for='local' className='text-form-registrer'>
                     Local
@@ -36,8 +31,6 @@ const Registrer = () => {
                 <Button variant='text' color='inherit'> Salvar </Button>
                 <Button variant='text' color='inherit'> Deletar </Button>
                 <Button variant='text' color='inherit'> Alarme </Button>
-                
-
                 
                 </FormControl>
                 </Grid>
