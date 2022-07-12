@@ -9,22 +9,48 @@ import {
 import {Container, Grid } from '@material-ui/core';
 import './style.css';
 import NavigatorUser from '../../navigatorUser/NavigatorUser';
+import { doc , addDoc, collection, deleteDoc, getDocs, updateDoc } from 'firebase/firestore';
+import {  db} from '../../Firebase/firebase'
+import { useEffect, useState} from 'react';
+import { Button} from '@material-ui/core';
 
-const schedulerData = [
-    { startDate: '2022-07-12T09:45', endDate: '2022-07-12T11:00', title:'Exemplo'}
-];
 
-const saveAppointment = (evento) => {
-  // função para lidar com a confirmação de alteração de compromisso salvar evento 
-  schedulerData.props = evento.target.value
-}
-
-const deleteAppointment = (evento) => {
-    // função para deletar compromisso 
-    schedulerData.props = evento.target.value.deleted
-}
 
 function DayViewUser (){
+
+    // estado para guardar os compromissos
+    const [compromisso, setCompromisso ]=useState([])
+
+    //variável responsável por carregar no calendário os compromissos
+    const schedulerData = [
+        {compromisso}
+    ];
+
+    // variável para trazer os dados do banco de dados
+    const appointmentCollectionRef = collection(db, 'appointment');
+    
+    // efeito para carregar o compromisso na página
+    useEffect(() => {
+         async function getCompromisso () {
+            const data = await getDocs(appointmentCollectionRef)
+            console.log(data);
+            setCompromisso(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        };
+        getCompromisso();
+    }, [])
+
+    async function deletarCompromisso (id){
+        const compromissoDoc  = doc(db, 'appointment' , id);
+        await deleteDoc(compromissoDoc)
+        console.log(compromissoDoc);
+    }
+
+    async function updateCompromisso (id) {
+        const compromissoDoc  = doc(db, 'appointment' , id);
+        await updateDoc(compromissoDoc)
+        console.log(compromissoDoc)
+    }
+   
     
     return (
         <div>
@@ -37,6 +63,13 @@ function DayViewUser (){
                 <Paper>
                 <Scheduler
                     data={schedulerData}>
+
+                <Button variant='text' color='inherit' 
+                onClick={deletarCompromisso}> Deletar 
+                </Button> 
+
+                <Button variant='text' color='inherit' onClick={updateCompromisso}> Atualizar </Button> 
+
                 <DayView
                     startDayHour={8}
                     endDayHour={13}

@@ -2,7 +2,8 @@ import { Button, FormControl, TextField, Grid, Container} from '@material-ui/cor
 import React, { useEffect, useState } from 'react';
 import './style.css'
 import {  db} from '../../Firebase/firebase'
-import { collection, getDocs } from 'firebase/firestore';
+import { doc , addDoc, collection, deleteDoc, getDocs } from 'firebase/firestore';
+import NavigatorUser from '../../navigatorUser/NavigatorUser';
 
 
 const Registrer = () => {
@@ -16,17 +17,31 @@ const Registrer = () => {
 
     
     const appointmentCollectionRef = collection(db, 'appointment');
-    useEffect(() => {
-        const getAppointment = async () => {
-            const data = await getDocs(appointmentCollectionRef)
-            console.log(data);
-            setCompromisso(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
-        }
-    }, [])
+   
+    async function criarCompromisso () {
+        const novoCompromisso = await addDoc(appointmentCollectionRef, {
+            startDate, endDate, local, tipo
+        })
+        console.log(novoCompromisso)
+    }
+
+    async function deletarCompromisso (id){
+        const compromissoDoc  = doc(db, 'appointment' , id);
+        await deleteDoc(compromissoDoc)
+        console.log(compromissoDoc);
+    }
+
+    function alarme () {
+        console.log({startDate})
+    }
+
+    
     return (
         <div>
+            <NavigatorUser/>
             <Container maxWidth='xs' >
             <Grid container justify='center'className='box' >
+                
                 <FormControl>
                 <label for='data' className='text-form-registrer'>
                     Data e horario inicial
@@ -48,35 +63,19 @@ const Registrer = () => {
                 </label>
                 <TextField for='tipo' required placeholder='reunião' value={tipo} onChange={e => setTipo(e.target.value)}/>
 
-                <Button variant='text' color='inherit'> Salvar </Button>
-                <Button variant='text' color='inherit'> Deletar </Button>
-                <Button variant='text' color='inherit'> Alarme </Button>
+                <Button variant='text' color='inherit'onClick={criarCompromisso}> Salvar </Button>
+                <Button variant='text' color='inherit' onClick={deletarCompromisso}> Deletar </Button>
+                <Button variant='text' color='inherit'onClick={alarme}> Alarme </Button>
                 
                 </FormControl>
                 </Grid>
             </Container>
 
-            <div>
-                <ul>
-                    {compromisso.map ((compromisso) => {
-                        return (
-                            <div key={compromisso.id}>
-                                <li>{compromisso.startDate}</li>
-                                <li>{compromisso.endDate}</li>
-                                <li>{compromisso.local}</li>
-                                <li>{compromisso.tipo}</li>
-
-                            </div>
-                            
-                        )
-                    })}
-                </ul>
-            </div>
+            
             
         </div>
     )
 }
 
 
- 
 export default Registrer;

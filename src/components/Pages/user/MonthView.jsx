@@ -4,26 +4,49 @@ import {Container, Grid} from '@material-ui/core';
 import './style.css'
 import { MonthView } from '@devexpress/dx-react-scheduler-material-ui';
 import NavigatorUser from '../../navigatorUser/NavigatorUser';
+import { doc , addDoc, collection, deleteDoc, getDocs, updateDoc } from 'firebase/firestore';
+import {  db} from '../../Firebase/firebase'
+import { useEffect, useState} from 'react';
+import { Button} from '@material-ui/core';
+
 
 
 
 function MonthViewUser (){
 
-    const schedulerData = [
-        { startDate: '2022-07-12T09:45', endDate: '2022-07-12T11:00', title:'Exemplo'}
-    ];
-    
-    const saveAppointment = (evento) => {
-      // função para lidar com a confirmação de alteração de compromisso salvar evento 
-      schedulerData.push()
-    }
-    
-    const deleteAppointment = (evento) => {
-        // função para deletar compromisso 
-        schedulerData.props = evento.target.value.pop();
+// estado para guardar os compromissos
+    const [compromisso, setCompromisso ]=useState([])
 
-    }
+    //variável responsável por carregar no calendário os compromissos
+    const schedulerData = [
+        {compromisso}
+    ];
+
+    // variável para trazer os dados do banco de dados
+    const appointmentCollectionRef = collection(db, 'appointment');
     
+    // efeito para carregar o compromisso na página
+    useEffect(() => {
+         async function getCompromisso () {
+            const data = await getDocs(appointmentCollectionRef)
+            console.log(data);
+            setCompromisso(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+        };
+        getCompromisso();
+    }, [])
+   
+    async function deletarCompromisso (id){
+        const compromissoDoc  = doc(db, 'appointment' , id);
+        await deleteDoc(compromissoDoc)
+        console.log(compromissoDoc);
+    }
+
+    async function updateCompromisso (id) {
+        const compromissoDoc  = doc(db, 'appointment' , id);
+        await updateDoc(compromissoDoc)
+        console.log(compromissoDoc)
+    }
+
     return (
         <div>
         <div id='calendar'>
@@ -31,10 +54,11 @@ function MonthViewUser (){
         <NavigatorUser />
             <Container maxWidth='md'  >
                 <Grid container justify='center'>
-                <Scheduler data={schedulerData} >
-                                    
+                <Scheduler data={schedulerData} >  
+                <Button variant='text' color='inherit' onClick={deletarCompromisso}> Deletar </Button>
+                <Button variant='text' color='inherit' onClick={updateCompromisso}> Atualizar </Button>   
                     <ViewState/>
-                    <EditingState onCommitChanges={saveAppointment}  />
+                    <EditingState />
                     <IntegratedEditing  />
                     <MonthView />
                       
