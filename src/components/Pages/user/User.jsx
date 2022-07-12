@@ -1,29 +1,52 @@
 import { ViewState , EditingState , IntegratedEditing} from '@devexpress/dx-react-scheduler';
-import  { Scheduler , WeekView , Appointments , AppointmentForm } from '@devexpress/dx-react-scheduler-material-ui';
+import  { Scheduler , WeekView  } from '@devexpress/dx-react-scheduler-material-ui';
 import {Container, Grid } from '@material-ui/core';
 import './style.css'
 import NavigatorUser from '../../navigatorUser/NavigatorUser';
+import {  collection, deleteDoc, getDocs, updateDoc, doc, Timestamp } from 'firebase/firestore';
+import {  db} from '../../Firebase/firebase'
+import { useEffect, useState} from 'react';
+import openAppointment from '../registrer/openAppointment';
 
 
 
+function UserSchedule (props){
 
 
-const schedulerData = [
-    { startDate: '2022-07-12T09:45', endDate: '2022-07-12T11:00', title:'Exemplo'}
-];
+    const schedulerData = [
+        { startDate: '2022-07-13T09:45', endDate: '2022-07-13T11:00', title:'Exemplo'}
+    ];
+   
+  // estado para guardar os compromissos
+  const [appointment, setAppointment ]=useState([])
 
-const saveAppointment = (evento) => {
-  // função para lidar com a confirmação de alteração de compromisso salvar evento 
-  schedulerData.props = evento.target.value
+
+  // variável para trazer os dados do banco de dados
+  const appointmentCollectionRef = collection(db, 'appointment');
+  
+  // efeito para carregar o compromisso na página
+  useEffect(() => {
+       async function getAppointment () {
+          const data = await getDocs(appointmentCollectionRef)
+        setAppointment(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+      };
+      getAppointment();
+  }, [])  
+
+
+
+const openAppointment = () => {
+
+    return (
+        <div>
+    
+
+    <openAppointment/>
+
+        </div>
+   
+    )
 }
-
-const deleteAppointment = (evento) => {
-    // função para deletar compromisso 
-    schedulerData.props = evento.target.value.deleted
-}
-
-
-function UserSchedule (){
 
     
     return (
@@ -32,18 +55,16 @@ function UserSchedule (){
         <div id='calendar'>
 
             <NavigatorUser/>
-
-
+            
             <Container maxWidth='md'  >
                 <Grid container justify='center'>
-                <Scheduler data={schedulerData} >
-                                    
+                <Scheduler data={schedulerData} onClick={openAppointment}>
+                             
                     <ViewState/>
-                    <EditingState onCommitChanges={saveAppointment} />
+                    <EditingState  />
                     <IntegratedEditing />
                     <WeekView startDayHour={8} endDayHour={19}/>
-                    <Appointments />
-                    <AppointmentForm />  
+                    
                 </Scheduler>
                 </Grid>
                  
