@@ -1,15 +1,23 @@
 import { Button , Grid, Container} from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import './style.css'
 import {  db} from '../../Firebase/firebase'
 import { doc , addDoc, collection, deleteDoc, getDocs , updateDoc} from 'firebase/firestore';
 import NavigatorUser from '../../navigatorUser/NavigatorUser';
 
+ const appointmentCollectionRef = collection(db, 'appointment');
 
-const openAppointment = () => {
+ class openAppointment extends Component  {
+    constructor ( startDate, endDate, local, tipo) {
+        super ( startDate, endDate, local, tipo)
+        this.startDate = appointmentCollectionRef.startDate;
+        this.endDate = appointmentCollectionRef.endDate;
+        this.local= appointmentCollectionRef.local;
+        this.tipo = appointmentCollectionRef.tipo;
+    }
 
         
-    const appointmentCollectionRef = collection(db, 'appointment');
+   
    
     // função para criar um novo compromisso e salvar no banco de dados
     async function createAppointment () {
